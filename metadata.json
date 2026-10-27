@@ -1,0 +1,8 @@
+{
+  "name": "Calculadora Python Moderna",
+  "description": "Calculadora moderna e interativa em tons de laranja, preto e branco com suporte a operações Python, histórico, memória e código fonte para download.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
