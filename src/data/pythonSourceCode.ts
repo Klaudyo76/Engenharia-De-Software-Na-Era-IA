@@ -171,7 +171,9 @@ class CalculadoraModerna(ctk.CTk):
         try:
             # Avaliação segura da expressão matemática em Python
             expressao_formatada = self.expressao.replace("÷", "/").replace("×", "*")
-            resultado = eval(expressao_formatada, {"__builtins__": None}, {"math": math})
+            safe_env = {k: v for k, v in math.__dict__.items() if not k.startswith("__")}
+            safe_env.update({"abs": abs, "round": round, "pow": pow, "min": min, "max": max, "math": math})
+            resultado = eval(expressao_formatada, {"__builtins__": {}}, safe_env)
             
             # Formatação do resultado (remove zeros desnecessários)
             if isinstance(resultado, float) and resultado.is_integer():
@@ -370,7 +372,9 @@ class CalculadoraTkinter:
         if not self.expressao:
             return
         try:
-            res = eval(self.expressao, {"__builtins__": None}, {"math": math})
+            safe_env = {k: v for k, v in math.__dict__.items() if not k.startswith("__")}
+            safe_env.update({"abs": abs, "round": round, "pow": pow, "min": min, "max": max, "math": math})
+            res = eval(self.expressao, {"__builtins__": {}}, safe_env)
             if isinstance(res, float) and res.is_integer():
                 res = int(res)
             elif isinstance(res, float):

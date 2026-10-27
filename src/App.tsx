@@ -240,6 +240,7 @@ export default function App() {
 
     if (res.success && res.result !== undefined) {
       const output = res.result;
+      setExpression(`${toEval} =`);
       setResult(output);
       setIsCalculated(true);
       setError(undefined);
